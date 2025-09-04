@@ -1,181 +1,138 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: 'Poppins', sans-serif;
+  background: #0f172a;
+  color: #f8fafc;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 1rem;
-  color: #333;
+  padding: 20px;
+  text-align: center;
 }
 
-/* Container */
 .container {
-  background: #fff;
-  border-radius: 1.2rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  width: 100%;
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 12px;
   max-width: 600px;
-  overflow: hidden;
-  animation: fadeIn 0.7s ease-in-out;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
-/* Screens */
+h1 {
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
 .screen {
   display: none;
-  padding: 2rem;
-  text-align: center;
 }
 
 .screen.active {
   display: block;
-  animation: fadeInUp 0.6s ease;
 }
 
-/* Headings */
-#start-screen h1,
-#result-screen h1 {
-  color: #764ba2;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-#start-screen p {
-  color: #555;
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-}
-
-/* Quiz header */
-.quiz-header {
-  margin-bottom: 1.5rem;
-}
-
-#question-text {
-  color: #222;
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
-}
-
-.quiz-info {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.95rem;
-  color: #777;
-}
-
-/* Answers */
-.answers-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin: 1.5rem 0;
-}
-
-.answer-btn {
-  background: #f3f0fa;
-  border: 2px solid #e0d9f6;
-  border-radius: 12px;
-  padding: 1rem;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-}
-
-.answer-btn:hover {
-  background: #e9e2f9;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(118, 75, 162, 0.15);
-}
-
-.answer-btn.correct {
-  background: #e6fff0;
-  border-color: #a3f0c4;
-  color: #28a745;
-}
-
-.answer-btn.incorrect {
-  background: #fff0f0;
-  border-color: #ffbdbd;
-  color: #dc3545;
-}
-
-/* Progress bar */
-.progress-bar {
-  height: 12px;
-  background: #eee;
-  border-radius: 6px;
-  overflow: hidden;
-  margin-top: 20px;
-}
-
-.progress {
-  height: 100%;
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  width: 0%;
-  transition: width 0.4s ease;
-}
-
-/* Results */
-.result-info {
-  background: #f3f0fa;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.result-info p {
-  font-size: 1.2rem;
-  margin-bottom: 0.8rem;
-}
-
-#result-message {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #764ba2;
-}
-
-/* Buttons */
 .primary-btn {
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: #3b82f6;
   color: white;
   border: none;
-  border-radius: 10px;
-  padding: 14px 28px;
+  border-radius: 8px;
+  padding: 12px 25px;
   font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  margin-top: 20px;
+  transition: 0.2s;
 }
 
 .primary-btn:hover {
-  background: linear-gradient(135deg, #5a6fd1, #693b96);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  background: #2563eb;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.answers-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.answers-container button {
+  background: #334155;
+  color: #f8fafc;
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s;
 }
 
-/* Responsive */
-@media (max-width: 500px) {
-  .screen { padding: 1.5rem; }
-  #question-text { font-size: 1.3rem; }
-  .answer-btn { padding: 12px; font-size: 0.95rem; }
-  .primary-btn { padding: 12px 22px; font-size: 1rem; }
+.answers-container button:hover {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.correct {
+  background: #16a34a !important;
+  border-color: #4ade80 !important;
+}
+
+.incorrect {
+  background: #dc2626 !important;
+  border-color: #f87171 !important;
+}
+
+.timer {
+  font-weight: 600;
+  color: #facc15;
+  margin-top: 5px;
+}
+
+.result-info {
+  background: #334155;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.name-input {
+  margin-top: 10px;
+}
+
+.name-input input {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  margin-right: 5px;
+  width: 150px;
+}
+
+.highscores {
+  text-align: left;
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.highscores h3 {
+  color: #38bdf8;
+  margin-bottom: 10px;
+}
+
+.footer-credit {
+  font-size: 0.8rem;          /* μικρότερο μέγεθος γραμματοσειράς */
+  text-transform: lowercase;  /* όλα τα γράμματα μικρά */
+  font-style: italic;         /* πλάγια γράμματα για πιο καλλιτεχνικό στυλ */
+  letter-spacing: 1px;        /* διάστιχο μεταξύ γραμμάτων για κομψότητα */
+  color: #888;                /* απαλό γκρι για minimal look */
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-credit span {
+  font-weight: 600;           /* έμφαση στο όνομα */
+  color: #e86a33;             /* ή κάποιο highlight color */
+  font-family: 'Poppins', sans-serif; /* μοντέρνα γραμματοσειρά */
 }

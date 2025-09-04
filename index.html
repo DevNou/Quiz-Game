@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quiz Game</title>
+  <title>Programming Quiz</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -11,8 +11,10 @@
   <div class="container">
     <!-- START SCREEN -->
     <div class="screen active" id="start-screen">
-      <h1>🎯 Quiz Time!</h1>
-      <p>Test your knowledge with these fun questions</p>
+      <h1>💻 Programming Quiz!</h1>
+      <p>Test your programming knowledge with these questions</p>
+    <p class="footer-credit">powered by <span>devar</span></p>
+
       <button id="start-btn" class="primary-btn">Start Quiz</button>
     </div>
 
@@ -21,33 +23,36 @@
       <div class="quiz-header">
         <h2 id="question-text">Question goes here</h2>
         <div class="quiz-info">
-          <p>
-            Question <span id="current-question">1</span> / <span id="total-questions">5</span>
-          </p>
+          <p>Question <span id="current-question">1</span> / <span id="total-questions">10</span></p>
           <p>Score: <span id="score">0</span></p>
+          <p class="timer">⏱ Time left: <span id="time">15</span>s</p>
         </div>
       </div>
-
-      <div id="answers-container" class="answers-container">
-        <!-- Buttons injected here -->
-      </div>
-
-      <div class="progress-bar">
-        <div id="progress" class="progress"></div>
-      </div>
+      <div id="answers-container" class="answers-container"></div>
     </div>
 
     <!-- RESULT SCREEN -->
     <div id="result-screen" class="screen">
-      <h1>🏆 Results</h1>
+      <h1>🏆 Quiz Finished!</h1>
       <div class="result-info">
-        <p>You scored <span id="final-score">0</span> / <span id="max-score">5</span></p>
-        <div id="result-message">Good job!</div>
+        <p>You scored <span id="final-score">0</span> / <span id="max-score">10</span></p>
+        <div id="result-message">Great job!</div>
+        <div class="name-input">
+          <label for="player-name">Enter your name:</label>
+          <input type="text" id="player-name" placeholder="Your name" maxlength="15" />
+          <button id="save-score-btn" class="primary-btn">Save Score</button>
+        </div>
       </div>
       <button id="restart-btn" class="primary-btn">Restart Quiz</button>
+
+      <div class="highscores">
+        <h3>Highscores</h3>
+        <ol id="highscoreList"></ol>
+      </div>
     </div>
   </div>
 
   <script src="script.js"></script>
 </body>
+
 </html>
