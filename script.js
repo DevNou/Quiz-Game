@@ -16,48 +16,93 @@ const progressBar = document.getElementById("progress");
 
 const quizQuestions = [
   {
-    question: "What is the capital of France?",
+    question: "Which language is used to structure content on the web?",
     answers: [
-      { text: "London", correct: false },
-      { text: "Berlin", correct: false },
-      { text: "Paris", correct: true },
-      { text: "Madrid", correct: false },
+      { text: "HTML", correct: true },
+      { text: "CSS", correct: false },
+      { text: "JavaScript", correct: false },
+      { text: "PHP", correct: false },
     ],
   },
   {
-    question: "Which planet is known as the Red Planet?",
+    question: "What does console.log() do in JavaScript?",
     answers: [
-      { text: "Venus", correct: false },
-      { text: "Mars", correct: true },
-      { text: "Jupiter", correct: false },
-      { text: "Saturn", correct: false },
+      { text: "Prints output to the browser console", correct: true },
+      { text: "Creates an alert box", correct: false },
+      { text: "Stops code execution", correct: false },
+      { text: "Stores data in cookies", correct: false },
     ],
   },
   {
-    question: "What is the largest ocean on Earth?",
+    question: "Which of the following is a styling language for the web?",
     answers: [
-      { text: "Atlantic Ocean", correct: false },
-      { text: "Indian Ocean", correct: false },
-      { text: "Arctic Ocean", correct: false },
-      { text: "Pacific Ocean", correct: true },
+      { text: "Python", correct: false },
+      { text: "CSS", correct: true },
+      { text: "Java", correct: false },
+      { text: "SQL", correct: false },
     ],
   },
   {
     question: "Which of these is NOT a programming language?",
     answers: [
-      { text: "Java", correct: false },
-      { text: "Python", correct: false },
-      { text: "Banana", correct: true },
       { text: "JavaScript", correct: false },
+      { text: "Python", correct: false },
+      { text: "HTML", correct: true },
+      { text: "C++", correct: false },
     ],
   },
   {
-    question: "What is the chemical symbol for gold?",
+    question: "Which keyword is used to declare a variable in modern JavaScript?",
     answers: [
-      { text: "Go", correct: false },
-      { text: "Gd", correct: false },
-      { text: "Au", correct: true },
-      { text: "Ag", correct: false },
+      { text: "var", correct: false },
+      { text: "int", correct: false },
+      { text: "let", correct: true },
+      { text: "define", correct: false },
+    ],
+  },
+  {
+    question: "Which database uses collections and documents instead of tables?",
+    answers: [
+      { text: "MySQL", correct: false },
+      { text: "PostgreSQL", correct: false },
+      { text: "MongoDB", correct: true },
+      { text: "SQLite", correct: false },
+    ],
+  },
+  {
+    question: "What does CSS stand for?",
+    answers: [
+      { text: "Cascading Style Sheets", correct: true },
+      { text: "Computer Styling System", correct: false },
+      { text: "Central Style Setup", correct: false },
+      { text: "Creative Sheet Styles", correct: false },
+    ],
+  },
+  {
+    question: "Which command is used to initialize a new Git repository?",
+    answers: [
+      { text: "git start", correct: false },
+      { text: "git init", correct: true },
+      { text: "git new", correct: false },
+      { text: "git create", correct: false },
+    ],
+  },
+  {
+    question: "Which of the following frameworks is based on JavaScript?",
+    answers: [
+      { text: "Django", correct: false },
+      { text: "Angular", correct: true },
+      { text: "Laravel", correct: false },
+      { text: "Spring", correct: false },
+    ],
+  },
+  {
+    question: "What does API stand for?",
+    answers: [
+      { text: "Application Programming Interface", correct: true },
+      { text: "Advanced Programming Integration", correct: false },
+      { text: "Application Process Input", correct: false },
+      { text: "Automated Program Interaction", correct: false },
     ],
   },
 ];
@@ -70,6 +115,15 @@ let answersDisabled = false;
 totalQuestionsSpan.textContent = quizQuestions.length;
 maxScoreSpan.textContent = quizQuestions.length;
 
+// Utility: Shuffle array (Fisher-Yates)
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 // event listeners
 startButton.addEventListener("click", startQuiz);
 restartButton.addEventListener("click", restartQuiz);
@@ -79,6 +133,9 @@ function startQuiz() {
   currentQuestionIndex = 0;
   score = 0;
   scoreSpan.textContent = 0;
+
+  // shuffle questions each time quiz starts
+  shuffleArray(quizQuestions);
 
   startScreen.classList.remove("active");
   quizScreen.classList.add("active");
@@ -101,30 +158,25 @@ function showQuestion() {
 
   answersContainer.innerHTML = "";
 
-  currentQuestion.answers.forEach((answer) => {
+  // shuffle answers before rendering
+  shuffleArray(currentQuestion.answers).forEach((answer) => {
     const button = document.createElement("button");
     button.textContent = answer.text;
     button.classList.add("answer-btn");
-
-    // what is dataset? it's a property of the button element that allows you to store custom data
     button.dataset.correct = answer.correct;
 
     button.addEventListener("click", selectAnswer);
-
     answersContainer.appendChild(button);
   });
 }
 
 function selectAnswer(event) {
-  // optimization check
   if (answersDisabled) return;
-
   answersDisabled = true;
 
   const selectedButton = event.target;
   const isCorrect = selectedButton.dataset.correct === "true";
 
-  // Here Array.from() is used to convert the NodeList returned by answersContainer.children into an array, this is because the NodeList is not an array and we need to use the forEach method
   Array.from(answersContainer.children).forEach((button) => {
     if (button.dataset.correct === "true") {
       button.classList.add("correct");
@@ -140,8 +192,6 @@ function selectAnswer(event) {
 
   setTimeout(() => {
     currentQuestionIndex++;
-
-    // check if there are more questions or if the quiz is over
     if (currentQuestionIndex < quizQuestions.length) {
       showQuestion();
     } else {
@@ -173,6 +223,5 @@ function showResults() {
 
 function restartQuiz() {
   resultScreen.classList.remove("active");
-
   startQuiz();
 }
